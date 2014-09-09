@@ -80,7 +80,14 @@ var EndPoint = function (collection, options) {
   }
 
   function resolveDocumentId(document, id) {
-    document._id = new Meteor.Collection.ObjectID(document._id || id);
+    var _id = document._id || id;
+
+    if (/^[a-f0-9]$/i.test(_id) {
+      document._id = new Meteor.Collection.ObjectID(_id);
+    }
+    else {
+      document._id = _id;
+    }
 
     return document;
   }
